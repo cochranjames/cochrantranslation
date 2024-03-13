@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${data.title}</title>
+  <link rel="stylesheet" href="./style-simple.css" />
+  <!-- OPENGRAPH -->
+
+  <!-- <meta itemprop="name" content="Providing Spanish~English Translation Services. Located in Charleston, WV" /> -->
+  <meta property="og:site_name" content="${data.title}" />
+  <meta property="og:title" content="${data.title}" />
+  <meta property="og:latitude" content="38.349819" />
+  <meta property="og:longitude" content="-81.632622" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://www.cochrantranslation.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Providing Spanish~English Translation Services. Located in Charleston, WV" />
+  <!-- <meta name="description" content="Providing Spanish~English Translation Services" /> -->
+  <!-- <meta itemprop="description" content="Providing Spanish~English Translation Services. Located in Charleston, WV" /> -->
+  <!-- <meta name="twitter:description" content="Providing Spanish~English Translation Services" /> -->
+
+
+  <!-- <meta itemprop="image" content="./cochran-translation.png" /> -->
+  <!-- <link rel="image_src" href="./cochran-translation.png" /> -->
+  <meta property="og:image" content="./cochran-translation.png" />
+  <meta property="og:image:width" content="1500" />
+  <meta property="og:image:height" content="1000" />
+
+  <meta itemprop="thumbnailUrl" content="./cochran-translation.png" />
+  <meta itemprop="author" content="James Cochran" />
+  <meta itemprop="datePublished" content="2024-02-06" />
+  <meta itemprop="dateModified" content="2024-02-06" />
+  <meta itemprop="headline" content="Providing Spanish~English Translation Services  Located in Charleston, WV" />
+  <meta itemprop="publisher" itemscope itemtype="http://schema.org/Person" content="James Cochran">
+
+  <meta name="twitter:title" content="${data.title}" />
+  <meta name="twitter:image" content="./cochran-translation.png" />
+  <meta name="twitter:url" content="https://www.cochrantranslation.com" />
+  <meta name="twitter:card" content="summary" />
+
+  <meta itemprop="url" content="https://www.cochrantranslation.com" />
+  <link rel="canonical" href="https://www.cochrantranslation.com" />
+</head>
+
+<body>
+  <main>
+    <!-- three buttons -->
+    <div class="buttons">
+      <button data-id="home">Home</button>
+      <button data-id="services">Services</button>
+      <button data-id="contact">Reach Out</button>
+    </div>
+    <section>
+      <div id="home" class="inner active">
+        <img class="avatar" src="./avatar.jpeg" alt="avatar" />
+        <h1>James Cochran</h1>
+        <div class="divider" style="width: 100px"></div>
+        <h2>Spansh~English Translation Services</h2>
+      </div>
+      <div id="services" class="inner">
+        <p>
+          From Spain to Argentina, Chile to Mexico, we've built connections and worked with
+          clients throughout Latin America, as well as The United States and other English
+          speaking countries. We can serve in a wide variety of contexts: tech, medical, legal,
+          industry, immigration, NGO, and more. Borders are not barriers.
+        </p>
+      </div>
+      <div id="contact" class="inner" method="POST">
+        <form data-netlify="true" name="reach-out">
+          <input type="text" placeholder="Name" data-es="Nombre" data-en="Name" />
+          <input type="email" placeholder="Email" data-es="" data-en="Email" />
+          <textarea placeholder="Message" name="message" data-es="" data-en="Message"></textarea>
+          <button class="btn-sm form-btn" data-es="" data-en="Send">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <div style="display: flex; justify-content: space-around; width: 80%; max-width: 400px">
+      <a href="./posts/ai-text-translation/"><button class="w-button">Writings</button></a>
+      <button class="es-button">Español</button>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2024 James Cochran</p>
+    <p>
+      site created by Malcolm Meyer |
+      <a href="https://www.getbounds.com" target="_blank">getBounds</a>
+    </p>
+  </footer>
+  <script>
+    const browserLanguage = navigator.language; // en-US
+    let language = browserLanguage.split("-")[0]; // en
+    const buttons = document.querySelector(".buttons").children;
+
+    const toggleView = (selectors, id) => {
+      for (let i = 0; i < selectors.length; i++) {
+        document.getElementById(selectors[i].dataset.id).style.visibility = "hidden";
+        document.getElementById(selectors[i].dataset.id).style.display = "none";
+
+        document.getElementById(selectors[i].dataset.id).style.maxHeight = "0";
+        document.getElementById(selectors[i].dataset.id).classList.remove("active");
+        // if (selectors[i].dataset.id !== id) {
+        //   setTimeout(() => {
+        //     document.getElementById(selectors[i].dataset.id).style.display = "none";
+        //   }, 500);
+        // }
+      }
+      setTimeout(() => {
+        document.getElementById(id).style.display = "flex";
+        document.getElementById(id).style.height = "auto";
+        document.getElementById(id).style.maxHeight = "10px";
+      }, 50);
+      setTimeout(() => {
+        document.getElementById(id).style.maxHeight = "75vh";
+        document.getElementById(id).classList.toggle("active");
+        window.location.hash = "";
+      }, 100);
+    };
+
+    const hash = window.location.hash;
+
+    if (hash && hash !== "#home" && ["#services", "#contact"].includes(hash)) {
+      toggleView(buttons, hash.slice(1));
+    } else {
+      document.getElementById("home").style.display = "flex";
+      document.getElementById("home").classList.add("active");
+      window.location.hash = "";
+    }
+
+    for (let i = 0; i < buttons.length; i++) {
+      const btn = buttons[i];
+      btn.addEventListener("click", () => {
+        toggleView(buttons, btn.dataset.id);
+      });
+    }
+    const switchLanguage = (lang) => {
+      if (lang === "es") {
+        document.querySelector("h1").textContent = "James Cochran";
+        document.querySelector("h2").textContent = "Servicios de Traducción Español~Inglés";
+        document.querySelector(".es-button").textContent = "English";
+        document.querySelector("#services").children[0].textContent =
+          "Desde España hasta Argentina, desde Chile hasta México, hemos construido conexiones y trabajado con clientes en toda América Latina, así como en Estados Unidos y otros países de habla inglesa. Podemos servir en una amplia variedad de contextos: tecnológico, médico, legal, industria, inmigración, ONG y más. Las fronteras no son barreras.";
+        buttons[0].textContent = "Inicio";
+        buttons[1].textContent = "Servicios";
+        buttons[2].textContent = "Contacto";
+        document.querySelector(".w-button").textContent = "Escritos";
+        const inputs = document.querySelectorAll("input");
+        const textArea = document.querySelector("textarea");
+        textArea.placeholder = textArea.dataset.es;
+        const formButton = document.querySelector(".form-btn");
+        formButton.textContent = formButton.dataset.es;
+        inputs.forEach((input) => {
+          input.placeholder = input.dataset.es;
+        });
+      } else {
+        document.querySelector("h1").textContent = "James Cochran";
+        document.querySelector("h2").textContent = "Spansh~English Translation Services";
+        document.querySelector(".es-button").textContent = "Español";
+        document.querySelector(".w-button").textContent = "Writings";
+
+        document.querySelector(
+          "#services"
+        ).children[0].textContent = "From Spain to Argentina, Chile to Mexico, we've built connections and worked with clients throughout Latin America, as well as The United States and other English speaking countries. We can serve in a wide variety of contexts: tech, medical, legal, industry, immigration, NGO, and more. Borders are not barriers.";
+        buttons[0].textContent = "Home";
+        buttons[1].textContent = "Services";
+        buttons[2].textContent = "Reach Out";
+        const inputs = document.querySelectorAll("input");
+        const textArea = document.querySelector("textarea");
+        textArea.placeholder = textArea.dataset.en;
+        const formButton = document.querySelector(".form-btn");
+        formButton.textContent = formButton.dataset.en;
+        inputs.forEach((input) => {
+          input.placeholder = input.dataset.en;
+        });
+      }
+    };
+    const esButton = document.querySelector(".es-button");
+    esButton.addEventListener("click", () => {
+      if (language === "es") {
+        language = "en";
+        switchLanguage(language);
+      } else {
+        language = "es";
+        switchLanguage(language);
+      }
+    });
+  </script>
+</body>
+
+</html>

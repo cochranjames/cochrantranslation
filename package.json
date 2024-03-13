@@ -1,0 +1,18 @@
+{
+  "name": "translation-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js",
+    "deploy": "rsync -avz --progress --delete ./ /Volumes/Projects/synology-web-apps/sandbox/james/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
