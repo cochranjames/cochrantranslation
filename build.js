@@ -39,4 +39,4 @@ copyFiles("src", "docs");
 
 const home = fs.readFileSync("src/index.html", "utf8");
 const homeHTML = toHTML(home, config[0]);
-fs.writeFileSync("dist/index.html", homeHTML);
+fs.writeFileSync("docs/index.html", homeHTML);
